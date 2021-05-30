@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+{% block stylesheet%}<link rel="stylesheet" href="/static/css/current.css">{%endblock%}
+{%block main%}
+<div class="container">
+	<div id="item-1" class="item">Weather Conditions</div>
+			<div id="item-2" class="item">Temperature</div>
+			<div id="item-3" class="item">Humidity</div>
+			<div class="item emoji">🌡 {{temp}}°C</div>
+			<div class="item emoji">💧 {{hum}}%</div>
+</div>
+{% endblock main %}

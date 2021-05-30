@@ -1,0 +1,39 @@
+body{
+	margin:0;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2%;
+}
+#heading{
+	font-size: 2em;
+	text-align: center;
+}
+.item {
+  width: 48%;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.thcontanier{
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+}
+
+.item2, .item4{
+width: 55%;
+height: 70vh;
+}
+
+.item1, .item3{
+width: 41%;
+font-size: 1.5em;
+
+}

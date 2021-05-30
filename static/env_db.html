@@ -1,0 +1,109 @@
+{% extends 'base.html'%}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/env_db.css">
+{%endblock%}
+
+{%block main%}
+<div id="heading">All readings from DataBase</div>
+<div class="container">
+<div class="item thcontainer item1">
+	<div class="h1">Temperature</div>						 													       	<div class="table">
+		 <table>	
+			<th>
+	 			<td>Time</td>
+	 			<td>°C</td>
+			</th>
+			{%for i in ls%}
+			 	<tr>
+					<td>{{i.datetime}}</td>	
+					<td>{{i.temp}}</td>
+	 			</tr> 	
+			{%endfor%}
+		 </table>
+	</div>
+	</div>
+	 <div id="temp_chart_div" class="item item2"></div>
+	 <div class="item thcontainer item3">	
+		 <div class="h1">Humidity</div>
+			<div class="table">
+		 		<table>
+		 			<th>							 				<td>Time</td>
+		 				<td>%</td>				 			</th>
+			 		{%for i in ls%}
+			 		<tr>
+						<td>{{i.datetime}}</td>
+						<td>{{i.hum}}</td>
+		 			</tr>
+		 			{%endfor%}
+		 		</table>
+		 </div>
+	 </div>	
+	<div id="hum_chart_div" class="item item4"></div>
+</div>
+{%endblock main%}
+
+{% block script%}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'Temperature');
+
+      data.addRows([
+        {%for i in ls%}
+	      [new Date({{i.datetime.year}},{{i.datetime.month}},{{i.datetime.day}},{{i.datetime.hour}},{{i.datetime.minute}},
+{{i.datetime.second}}),{{i.temp}}],
+        {%endfor%}
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Temperature'
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('temp_chart_div'));
+
+      chart.draw(data, options);
+    }
+</script>
+<script>
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'Humidity');
+
+      data.addRows([
+        {%for i in ls%}
+	      [new Date({{i.datetime.year}},{{i.datetime.month}},{{i.datetime.day}},{{i.datetime.hour}},{{i.datetime.minute}},{{i.datetime.second}}), {{i.hum}}],
+        {%endfor%}
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Humidity'
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('hum_chart_div'));
+
+      chart.draw(data, options);
+    }
+</script>
+{% endblock script %}

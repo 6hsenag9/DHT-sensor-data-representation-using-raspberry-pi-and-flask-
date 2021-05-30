@@ -1,0 +1,27 @@
+body{
+	margin:0;
+	font-family: 'Raleway', sans-serif;
+	font-size: 3.5em;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.item {
+  width: 48%;
+  height: 100px;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.item:nth-child(1) {
+  text-align: center;
+  width: 100%;
+}
+
+.emoji{
+	font-size: 2em;
+}
